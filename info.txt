@@ -1,0 +1,21 @@
+docker compose up --build
+docker compose up --build -d (segundo plano)
+
+localhost:8087 (PHP_BD)
+localhost:3306
+
+admin : root
+senha : root
+
+os "scrip.sql" vão na aba importar e devem estar na mesma pasta
+
+===================================
+CREATE DATABASE testecriacao;
+SELECT * FROM servicos;
+
+SHOW DATABASES (mostra todos os databases)
+
+DROP DATABASE teste (deleta o banco teste)
+
+EXPORTANDO BANCO:
+mysqldump -u root empresa > empresa2.sql
