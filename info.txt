@@ -19,3 +19,61 @@ DROP DATABASE teste (deleta o banco teste)
 
 EXPORTANDO BANCO:
 mysqldump -u root empresa > empresa2.sql
+
+CRIANDO TABELAS:
+CREATE TABLE <nome> (<coluna> <tipo de dado>)
+CREATE TABLE pessoas (nome VARCHAR(100); cpf CHAR(11); descricao MEDUIMTEXT) //CHAR(11) "11 => delimita o tamanho da string"
+
+TIPOS DE DADOS:
+VARCHAR (strings grandes, 0 - 65535 caracteres) "Nome, descricao";
+CHAR (strings pequenas, 0 - 255 caracteres) "cpf, cargo";
+BIT (1 A 64 caracteres);
+TINYTEXT (reserva espaço em bits na memória, texto até 255 caracteres);
+BOOL (0 é falso e outros valores são verdadeiros)
+MEDUIMTEXT (reserva espaço em bits na memória);
+INT(entre -214783648 a 214783647); //mais comum
+OBS: CHAR e VARCHAR aceitam numeros e caracteres especiais;
+
+DELETANDO TABELA:
+CREATE TABLE carro (modelo VARCHAR(15));
+DROP TABLE carro;
+
+INSERINDO DADOS:
+INSERT INTO <tabela> (<colunas...>) VALUES(<valores...>)
+INSERT INTO produtos(nome, sku, informacoes) VALUES ("Playstation 5", "PS5XY", "É um videogame de última geração")
+
+CREATE TABLE servidores (nome VARCHAR(100), espaco_disco INT(10), ligado BOOL);
+INSERT INTO servidores (nome, espaco_disco, ligado) VALUES("Servidor 3", 12683648, 1);
+INSERT INTO servidores (nome, espaco_disco, ligado) VALUES("Servidor 4", 10384458, 0);
+SELECT * from servidores;
+
+TIPO DATE/DATA:
+DATE (YYYY-MM-DD);
+DATETIME (YYYY-MM-DD hh:mm:ss);
+TIMESTAMP - aceita uma data no formato DATETIME, entre 1970-2038
+OBS: as datas são inseridas entre aspas;
+
+CREATE TABLE aniversario (nome VARCHAR(100), data_nascimento DATE);
+INSERT INTO aniversario(nome, data_nascimento) VALUES("Lucas", "2002-08-19");
+SELECT * FROM aniversario;
+
+ALTERAÇÃO DE TABELAS:
+- ADIÇÃO DE COLUNAS:
+ALTER TABLE <tabela> ADD COLUMN <nome> <tipo>;
+
+CREATE TABLE funcionarios (nome VARCHAR(100));
+ALTER TABLE funcionarios ADD COLUMN profissao VARCHAR(100);
+INSERT INTO funcionarios(nome,profissao) VALUES ("Lucas", "Dev");
+SELECT * FROM funcionarios;
+
+- REMOÇÃO DE COLUNAS:
+ALTER TABLE <tabela> DROP COLUMN <nome>;
+
+ALTER TABLE funcionarios drop COLUMN profissao
+SELECT * FROM funcionarios;
+
+- MODIFICAÇÃO DE COLUNAS:
+ALTER TABLE <tabela> MODIFY COLUMN <coluna> <tipo>;
+
+ALTER TABLE funcionarios ADD COLUMN data_nascimento VARCHAR(100);
+ALTER TABLE funcionarios MODIFY COLUMN data_nascimento Date;
