@@ -1,5 +1,6 @@
 docker compose up --build
 docker compose up --build -d (segundo plano)
+docker compose stop (para ele parar)
 
 localhost:8087 (PHP_BD)
 localhost:3306
