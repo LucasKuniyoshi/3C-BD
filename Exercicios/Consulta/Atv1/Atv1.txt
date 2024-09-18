@@ -1,0 +1,30 @@
+ESTRUTURA DE UMA CONSULTA
+
+SELECT Lista de atributos
+FROM Lista de tabelas
+WHERE Condições
+
+Para verificar se as consultas estão corretas, utilize o banco de dados chamado codeacademy que foi disponibilizado.
+
+Exercícios:
+
+Listar todas as informações dos produtos cadastrados.
+SELECT * FROM produto;
+
+Listar o código, nome fantasia, endereço, telefone e código da cidade dos fornecedores cadastrados.
+SELECT codFornecedor, nomeFantasia, endereco, telefone, codCidade FROM fornecedor;
+
+Listar o código da venda, data de venda de todas as vendas com status de ‘Despachada’.
+SELECT codVenda, dataVenda FROM venda WHERE status = 'Despachada';
+
+Listar todas as informações da tabela de pessoas jurídicas.
+SELECT * FROM clienteJuridico;
+
+Listar o número do lote dos produtos que estão com a data de validade vencida.
+SELECT numeroLote FROM produtoLote WHERE dataValidade  < '2024-04-01';
+
+Listar o nome dos departamentos.
+SELECT nome FROM departamento;
+
+
+

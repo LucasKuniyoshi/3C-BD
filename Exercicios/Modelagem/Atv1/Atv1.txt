@@ -1,0 +1,138 @@
+Crie um banco de dados (pode escolher o nome), depois faça a criação das seguintes tabelas.
+
+Estrutura de criação de tabela:
+CREATE TABLE nomeDaTabela (
+	nomeColuna1 tipo parametros,
+	nomeColuna2 tipo parametros
+	);
+
+Informações úteis de parâmetros:
+Campo de preenchimento obrigatório: NOT NULL
+Campo com valores únicos: UNIQUE
+Campo com valores que precisam satisfazer uma condição: CHECK (condição)
+Campo com valores padrões: DEFAULT ‘valor’
+
+É possível colocar diversos parâmetros se necessário.
+
+Exemplo:
+CREATE TABLE pessoa (
+	nome varchar(40) UNIQUE NOT NULL,
+	idade int NOT NULL,
+	sexo varchar(5) CHECK (sexo in (‘M’, ‘F’, ‘Outro’)
+	raça DEFAULT ‘humano’
+	);
+
+O exemplo acima cria uma tabela chamada pessoa, que contém os campos nome (texto até 40 caracteres, único e de preenchimento obrigatório), idade (inteiro e de preenchimento obrigatório) e sexo (texto de até 5 caracteres, preenchimento opcional pois não tem o NOT NULL e recebe apenas os valores ‘M’, ‘F’ ou ‘Outro’).
+
+Observação: As tabelas descritas abaixos estão incompletas, nos pŕoximos dias iremos completar elas conforme novos conteúdos são estudados.
+
+Tabela departamento:
+O campo codDepartamento é de numeração automática (SERIAL)
+O campo nome é de texto, de tamanho variável máximo 40, sendo uma chave candidata (UNIQUE), de preenchimento obrigatório;
+O campo descricaoFuncional é de texto, de tamanho variável máximo 80, sendo um campo de preenchimento opcional;
+O campo localizacao é de texto, de tamanho ilimitado.
+
+Tabela estado:
+O campo siglaEstado é de texto, de tamanho fixo 2;
+O campo nome é de texto, de tamanho variável máximo 30, sendo uma chave candidata de preenchimento obrigatório.
+
+Tabela cidade:
+O campo codCidade é de numeração automática
+O campo nome é texto, de tamanho variável máximo 50, sendo uma chave candidata, de preenchimento obrigatório;
+O campo siglaEstado é de texto, de tamanho fixo 2 e de preenchimento obrigatório
+
+Tabela vendedor:
+O campo codVendedor é de numeração automática;
+O campo nome é de texto, de tamanho variável máximo 60, de preenchimento obrigatório;
+O campo dataNascimento é um campo tipo data;
+O campo endereco é de texto, de tamanho variável máximo 60;
+O campo cep é tamanho fixo máximo 8;
+O campo telefone é caracter, de tamanho variável máximo 20;
+O campo codCidade é inteiro;
+A dataContratacao é um campo data, que terá como valor padrão a data atual de inserção do registro, no caso de uma data não ter sido especificada;
+O campo codDepartamento é inteiro;
+
+Tabela cliente:
+O campo codCliente é um campo de numeração automática;
+O campo endereco é de texto, de tamanho variável máximo 60;
+O campo codCidade é inteiro e de preenchimento obrigatório;
+O campo telefone é de texto, de tamanho variável máximo 20;
+O campo tipo é caracter, de tamanho fixo máximo 1, sendo que pode assumir somente os valores F ou J; 
+A dataCadastro é um campo data, que terá como valor padrão a data atual de cadastro, no caso de uma data não ter sido especificada;
+O campo cep é tamanho fixo máximo 8;
+
+
+Tabela clienteFisico:
+O campo codCliente é um inteiro;
+O campo nome é de texto, de tamanho variável máximo 50, de preenchimento obrigatório;
+O campo dataNascimento é um campo data;
+O campo cpf é caracter, de tamanho variável máximo 11, de preenchimento obrigatório, sendo uma chave candidata;
+O campo rg é caracter, de tamanho variável máximo 8;
+
+Tabela clienteJuridico:
+O campo codCliente é um inteiro;
+O campo nomeFantasia é de texto, de tamanho variável máximo 80, sendo uma chave candidata;
+O campo razaoSocial é de texto, de tamanho variável máximo 80, sendo uma chave candidata, de preenchimento obrigatório;
+O campo ie (inscrição estadual) é de texto, de tamanho variável máximo 20, de preenchimento obrigatório, sendo uma chave candidata;
+O campo cgc é de texto, de tamanho variável máximo 20, sendo uma chave candidata, de preenchimento obrigatório;
+
+Tabela classe:
+O campo codClasse é um campo de numeração automática;
+O campo sigla é de texto, de tamanho variável máximo 12;
+O campo nome é de texto, de tamanho variável máximo 40, com preenchimento obrigatório;
+O campo descricaoo é de texto, de tamanho variável máximo 80.
+
+Tabela produto:
+O campo codProduto é um campo de numeração automática;
+O campo descrição é de texto, de tamanho variável máximo 40, sendo de preenchimento obrigatório;
+O campo unidadeMedida é de texto, de tamanho fixo máximo 2;
+O campo embalagem é de texto, de tamanho variável máximo 15, que terá como valor padrão padrão ‘Fardo’, no caso de uma embalagem não ter sido especificada;
+O campo codClasse é um inteiro;
+O campo precoVenda é um numérico com tamanho 14, com 2 casas decimais;
+O campo estoqueMinimo é um numérico com tamanho 14, com 2 casas decimais;
+
+
+Tabela produtoLote:
+O campo codProduto é um campo inteiro;
+O campo numeroLote é um campo inteiro;
+O campo quantidadeAdquirida é um numérico com tamanho 14, com 2 casas decimais;
+O campo quantidadeVendida é um numérico com tamanho 14, com 2 casas decimais;
+O campo precoCusto é um numérico com tamanho 14, com 2 casas decimais;
+O campo dataValidade é um campo de data;
+
+Tabela venda:
+O campo codVenda é um campo inteiro;
+O campo codCliente é um campo inteiro;
+O campo codVendedor é um campo inteiro;
+O campo dataVenda é um campo de data, que tem como valor padrão a data atual, sendo que outras datas podem ser especificadas;
+O campo enderecoEntrega é caracter, de tamanho variável máximo 60;
+O campo status é caracter, de tamanho variável máximo 30;
+
+Tabela itemVenda:
+O campo codVenda é um campo inteiro;
+O campo codProduto é um campo inteiro;
+O campo numeroLote é um campo inteiro;
+O campo quantidade é um numérico com tamanho 14, com 2 casas decimais, sendo seu preenchimento obrigatório e com valor positivo;
+
+Tabela fornecedor:
+O campo codFornecedor é um inteiro;
+O campo nomeFantasia é caracter, de tamanho variável máximo 80, sendo uma chave candidata;
+O campo razaoSocial é caracter, de tamanho variável máximo 80, sendo uma chave candidata, de preenchimento obrigatório;
+O campo ie (inscrição estadual) é caracter, de tamanho variável máximo 20, de preenchimento obrigatório, sendo uma chave candidata;
+O campo cgc é caracter, de tamanho variável máximo 20, sendo uma chave candidata, de preenchimento obrigatório;
+O campo endereco é caracter, de tamanho variável máximo 60;
+O campo telefone é caracter, de tamanho variável máximo 20;
+O campo codCidade é inteiro;
+
+Tabela pedido:
+O campo codPedido é serial;
+O campo dataRealizacao é um campo de data, que tem como valor padrão a data atual, sendo que outras datas podem ser especificadas;
+O campo dataEntrega é um campo de data;
+O campo codFornecedor é um campo inteiro;
+O campo valor é um campo numérico de tamanho 20 com duas casas decimais;
+
+Tabela itemPedido:
+O campo codPedido é inteiro
+O campo codProduto é inteiro;
+O campo quantidade é um numérico com tamanho 14, com 2 casas decimais, sendo seu preenchimento obrigatório e com valor positivo.
+

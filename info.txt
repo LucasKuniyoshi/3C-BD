@@ -11,6 +11,11 @@ senha : root
 os "scrip.sql" vão na aba importar e devem estar na mesma pasta
 
 ===================================
+
+            MODELAGEM
+
+===================================
+
 CREATE DATABASE testecriacao;
 SELECT * FROM servicos;
 
@@ -78,3 +83,25 @@ ALTER TABLE <tabela> MODIFY COLUMN <coluna> <tipo>;
 
 ALTER TABLE funcionarios ADD COLUMN data_nascimento VARCHAR(100);
 ALTER TABLE funcionarios MODIFY COLUMN data_nascimento Date;
+
+===================================
+
+            CONSULTA
+
+===================================
+
+SELECT * FROM pessoas; (PEGA TUDO)
+SELECT nome,rg FROM pessoas; (PEGA ŚO NOME E RG)
+
+INSERT INTO pessoas(nome,rg,cpf,limite) VALUES ("Joaquim", "1231423", "5477586", 99999) = INSERT INTO pessoas VALUES ("Joaquim", "1231423", "5477586", 99999);
+
+SELECT * FROM pessoas WHERE nome = 'Pedro';
+
+UPDATE: 
+UPDATE <tabela> set <coluna> = <novoValor> WHERE <colunaChavePrimaria> = <valor>
+UPDATE pessoas SET limite = 800000, rg = '324535' WHERE nome = 'Roberta';
+
+DELETE:
+DELETE FROM <tabela> WHERE <condicao>
+DELETE FROM pessoas WHERE nome = "Joaquim";
+DELETE FROM pessoas WHERE limite > 2000; (deleta os q tem limite maior q 2000)
