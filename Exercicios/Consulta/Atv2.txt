@@ -1,0 +1,68 @@
+ESTRUTURA DE UMA CONSULTA
+
+SELECT Lista de atributos
+FROM Lista de tabelas
+WHERE Condições
+
+Para verificar se as consultas estão corretas, utilize o banco de dados chamado codeacademy que foi disponibilizado.
+
+Exercícios:
+
+Listar o código, nome, endereço, nome da cidade, nome do estado dos vendedores cadastrados.
+SELECT vendedor.codVendedor, vendedor.nome, vendedor.endereco, cidade.nome, estado.nome
+FROM vendedor
+INNER JOIN cidade
+ON vendedor.codCidade = cidade.codCidade
+INNER JOIN estado
+ON cidade.siglaEstado = estado.siglaEstado;
+
+Listar o código da venda, data de venda, nome do vendedor de todas as vendas com status de ‘Despachada’.
+SELECT venda.codVenda, venda.dataVenda, vendedor.nome
+FROM venda
+INNER JOIN vendedor
+ON venda.codVendedor = vendedor.codVendedor
+WHERE venda.status = 'Despachada';
+
+Listar os clientes pessoa física que moram na Rua Marechal Floriano, 56.
+SELECT clienteFisico.* 
+FROM clienteFisico
+INNER JOIN cliente
+ON clienteFisico.codCliente  = cliente.codCliente 
+WHERE cliente.endereco = 'Rua Marechal Floriano, 56';
+
+Listar todas as informações dos clientes que são pessoas jurídicas.
+SELECT * FROM clienteJuridico;
+
+Listar o nome fantasia, endereço, telefone, nome da cidade, sigla do estado de todos os clientes jurídicos que foram cadastrados entre 01/01/1999 e 30/06/2003.
+SELECT clienteJuridico.nomeFantasia, clienteJuridico.endereco, clienteJuridico.telefone, cidade.nome, cidade.siglaEstado 
+FROM clienteJuridico
+INNER JOIN cliente
+ON clienteJuridico.codCliente  = cliente.codCliente 
+INNER JOIN cidade
+ON cliente.codCidade  = cidade.codCidade 
+WHERE cliente.dataCadastro BETWEEN '1999-01-01' AND '2003-06-30';
+
+Listar o nome dos vendedores que realizaram vendas para o cliente pessoa jurídica com nome fantasia ‘Gelinski’.
+SELECT vendedor.nome
+FROM vendedor
+INNER JOIN cliente
+ON vendedor.codCidade = cliente.codCidade
+INNER JOIN clienteJuridico
+ON cliente.codCliente  = clienteJuridico.codCliente 
+WHERE clienteJuridico.nomeFantasia = 'Gelinski';
+
+Listar o código, o número do lote e o nome dos produtos que estão com a data de validade vencida.
+SELECT produto.codProduto, produtoLote.numeroLote, produto.descricao
+FROM produto
+INNER JOIN produtoLote
+ON produto.codProduto = produtoLote.codProduto
+WHERE produtoLote.dataValidade < '2024-01-01' ;
+
+Listar o nome dos departamentos e o nome dos vendedores neles lotados.
+SELECT departamento.nome, vendedor.nome
+FROM departamento
+INNER JOIN vendedor
+ON departamento.codDepartamento = vendedor.codDepartamento; 
+
+
+
