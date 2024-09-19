@@ -1,0 +1,14 @@
+CREATE DATABASE Atv2
+
+CREATE TABLE departamento (codDepartamento INT PRIMARY KEY AUTO_INCREMENT NOT NULL, nome VARCHAR(40) UNIQUE NOT NULL,descricaoFuncional VARCHAR(80), localizacao BLOB);
+CREATE TABLE estado (siglaEstado VARCHAR(2) PRIMARY KEY, nome VARCHAR(30) UNIQUE NOT NULL);
+CREATE TABLE cidade (codCidade INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(30) UNIQUE NOT NULL, siglaEstado VARCHAR(2) NOT NULL, FOREIGN KEY(siglaEstado) REFERENCES estado(siglaEstado));
+CREATE TABLE vendedor (codVendedor INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(60) NOT NULL, dataNascimento DATE, endereco VARCHAR(60), cep CHAR(8), telefone CHAR(20), codCidade INT, dataContratacao DATE DEFAULT '2024-09-17', codDepartamento INT, FOREIGN KEY (codCidade) REFERENCES cidade(codCidade), FOREIGN KEY (codDepartamento) REFERENCES departamento(codDepartamento));
+CREATE TABLE cliente (codCliente INT PRIMARY KEY AUTO_INCREMENT, endereco VARCHAR(60), codCidade INT NOT NULL, telefone VARCHAR(20), tipo VARCHAR(1) CHECK (tipo in ('F', 'J')), dataCadastro DATE DEFAULT '2024-09-17', cep VARCHAR(8), FOREIGN KEY (codCidade) REFERENCES cidade(codCidade));
+CREATE TABLE clienteFisico (codCliente INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(50) NOT NULL, dataNascimento DATE, cpf CHAR(11) NOT NULL UNIQUE, rg CHAR(8), FOREIGN KEY (codCliente) REFERENCES cliente(codCliente));
+CREATE TABLE clienteJuridico (codCliente INT PRIMARY KEY AUTO_INCREMENT, nomeFantasia VARCHAR(80) UNIQUE, razaoSocial VARCHAR(80) UNIQUE NOT NULL, ie VARCHAR(20) UNIQUE NOT NULL, cgc VARCHAR(20) UNIQUE NOT NULL, FOREIGN KEY (codCliente) REFERENCES cliente(codCliente));
+CREATE TABLE classe (codClasse INT PRIMARY KEY AUTO_INCREMENT, sigla CHAR(12), nome VARCHAR(40) NOT NULL, descricao VARCHAR(80));
+CREATE TABLE produto (codProduto INT PRIMARY KEY AUTO_INCREMENT, descricao VARCHAR(40) NOT NULL, unidadeMedida CHAR(2), embalagem VARCHAR(15) DEFAULT 'Fardo', codClasse INT, precoVenda NUMERIC(14,2), estoqueMinimo NUMERIC(14,2), FOREIGN KEY (codClasse) REFERENCES classe (codClasse));
+CREATE TABLE produtoLote (codProduto INT, numeroLote INT, quantidadeAdquirida NUMERIC(14,2), quantidadeVendida NUMERIC(14,2), precoCusto NUMERIC(14,2), dataValidade DATE, PRIMARY KEY(codProduto, numeroLote),FOREIGN KEY (codProduto) REFERENCES produto (codProduto));
+CREATE TABLE venda (codVenda INT PRIMARY KEY, codCliente INT, codVendedor INT, dataVenda DATE DEFAULT '2024-09-19', enderecoEntrega VARCHAR(60), status VARCHAR(30), FOREIGN KEY (codCliente) REFERENCES cliente (codCliente), FOREIGN KEY (codVendedor) REFERENCES vendedor (codVendedor));
+CREATE TABLE itemVenda (codVenda INT, codProduto INT, numeroLote INT, quantidade NUMERIC(14,2) NOT NULL, PRIMARY KEY(codVenda, codProduto, numeroLote),FOREIGN KEY (codVenda) REFERENCES venda (codVenda), FOREIGN KEY (codProduto, numeroLote) REFERENCES produtoLote (codProduto, numeroLote));

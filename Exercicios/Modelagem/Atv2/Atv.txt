@@ -1,0 +1,139 @@
+Crie outro banco de dados, depois faça a criação das seguintes tabelas.
+
+Observação: As tabelas abaixo são as mesmas criadas anteriormente, porém com mais informações, utilizem o mesmo script criado anteriormente, as informações novas estarão em destaque.
+
+Modelo de criação de chave estrangeira:
+FOREIGN KEY (id) REFERENCES nometabela (tabela_id) 
+
+Tabela departamento:
+O campo codDepartamento é de numeração automática, sendo chave primária da tabela;
+O campo nome é de texto, de tamanho variável máximo 40, sendo uma chave candidata, de preenchimento obrigatório;
+O campo descricaoFuncional é de texto, de tamanho variável máximo 80, sendo um campo de preenchimento opcional;
+O campo localizacao é de texto, de tamanho ilimitado.
+
+Tabela estado:
+O campo siglaEstado é de texto, de tamanho fixo 2, sendo chave primária da tabela;
+O campo nome é de texto, de tamanho variável máximo 30, sendo uma chave candidata (única), de preenchimento obrigatório.
+
+Tabela cidade:
+O campo codCidade é de numeração automática, sendo chave primária da tabela;
+O campo nome é texto, de tamanho variável máximo 50, sendo uma chave candidata, de preenchimento obrigatório;
+O campo siglaEstado é de texto, de tamanho fixo 2 e de preenchimento obrigatório, sendo uma chave estrangeira da tabela estado. 
+
+Tabela vendedor:
+O campo codVendedor é de numeração automática, sendo chave primária da tabela;
+O campo nome é de texto, de tamanho variável máximo 60, de preenchimento obrigatório;
+O campo dataNascimento é um campo tipo data;
+O campo endereco é de texto, de tamanho variável máximo 60;
+O campo cep é tamanho fixo máximo 8;
+O campo telefone é caracter, de tamanho variável máximo 20;
+O campo codCidade é inteiro sendo uma chave estrangeira da tabela cidade;
+A dataContratacao é um campo data, que terá como valor padrão a data atual de inserção do registro, no caso de uma data não ter sido especificada;
+O campo codDepartamento é inteiro sendo uma chave estrangeira da tabela departamento;
+
+
+
+Tabela cliente:
+O campo codCliente é um campo de numeração automática, sendo chave primária da tabela;
+O campo endereco é de texto, de tamanho variável máximo 60;
+O campo codCidade é inteiro e de preenchimento obrigatório, sendo uma chave estrangeira da tabela cidade;
+O campo telefone é de texto, de tamanho variável máximo 20;
+O campo tipo é caracter, de tamanho fixo máximo 1;
+A dataCadastro é um campo data, que terá como valor padrão a data atual de cadastro, no caso de uma data não ter sido especificada;
+O campo cep é tamanho fixo máximo 8;
+
+Tabela clienteFisico:
+O campo codCliente é um inteiro, sendo chave primária desta tabela, e chave estrangeira da tabela cliente;
+O campo nome é de texto, de tamanho variável máximo 50, de preenchimento obrigatório;
+O campo dataNascimento é um campo data;
+O campo cpf é caracter, de tamanho variável máximo 11, de preenchimento obrigatório, sendo uma chave candidata;
+O campo rg é caracter, de tamanho variável máximo 8;
+
+Tabela clienteJuridico:
+O campo codCliente é um inteiro, sendo chave primária desta tabela, e chave estrangeira da tabela cliente;
+O campo nomeFantasia é de texto, de tamanho variável máximo 80, sendo uma chave candidata;
+O campo razaoSocial é de texto, de tamanho variável máximo 80, sendo uma chave candidata, de preenchimento obrigatório;
+O campo ie (inscrição estadual) é de texto, de tamanho variável máximo 20, de preenchimento obrigatório, sendo uma chave candidata;
+O campo cgc é de texto, de tamanho variável máximo 20, sendo uma chave candidata, de preenchimento obrigatório;
+
+Tabela classe:
+O campo codClasse é um campo de numeração automática, sendo chave primária da tabela;
+O campo sigla é de texto, de tamanho variável máximo 12;
+O campo nome é de texto, de tamanho variável máximo 40, com preenchimento obrigatório;
+O campo descricao é de texto, de tamanho variável máximo 80.
+
+Tabela produto:
+O campo codProduto é um campo de numeração automática, sendo chave primária da tabela;
+O campo descrição é de texto, de tamanho variável máximo 40, sendo de preenchimento obrigatório;
+O campo unidadeMedida é de texto, de tamanho fixo máximo 2;
+O campo embalagem é de texto, de tamanho variável máximo 15, que terá como valor padrão padrão ‘Fardo’, no caso de uma embalagem não ter sido especificada;
+O campo codClasse é um inteiro, sendo chave estrangeira da tabela classe;
+O campo precoVenda é um numérico com tamanho 14, com 2 casas decimais;
+O campo estoqueMinimo é um numérico com tamanho 14, com 2 casas decimais;
+
+Tabela produtoLote:
+O campo codProduto é um campo inteiro, sendo chave primária da tabela e chave estrangeira da tabela produto;
+O campo numeroLote é um campo inteiro, sendo chave primária da tabela;
+O campo quantidadeAdquirida é um numérico com tamanho 14, com 2 casas decimais;
+O campo quantidadeVendida é um numérico com tamanho 14, com 2 casas decimais;
+O campo precoCusto é um numérico com tamanho 14, com 2 casas decimais;
+O campo dataValidade é um campo de data;
+
+Tabela venda:
+O campo codVenda é um campo inteiro, sendo chave primária da tabela;
+O campo codCliente é um campo inteiro, sendo chave estrangeira da tabela cliente;
+O campo codVendedor é um campo inteiro, sendo chave estrangeira da tabela vendedor;
+O campo dataVenda é um campo de data, que tem como valor padrão a data atual, sendo que outras datas podem ser especificadas;
+O campo enderecoEntrega é caracter, de tamanho variável máximo 60;
+O campo status é caracter, de tamanho variável máximo 30;
+
+Tabela itemVenda:
+O campo codVenda é um campo inteiro, sendo chave primária da tabela e estrangeira da tabela venda;
+O campo codProduto é um campo inteiro, sendo chave primária da tabela, e chave estrangeira da tabela lote (chave estrangeira de lote é composta por codProduto e numeroLote);
+O campo numeroLote é um campo inteiro, sendo chave primária da tabela, e chave estrangeira da tabela lote;
+O campo quantidade é um numérico com tamanho 14, com 2 casas decimais, sendo seu preenchimento obrigatório e com valor positivo;
+
+Tabela fornecedor:
+O campo codFornecedor é um inteiro, sendo chave primária desta tabela;
+O campo nomeFantasia é caracter, de tamanho variável máximo 80, sendo uma chave candidata;
+O campo razaoSocial é caracter, de tamanho variável máximo 80, sendo uma chave candidata, de preenchimento obrigatório;
+O campo ie (inscrição estadual) é caracter, de tamanho variável máximo 20, de preenchimento obrigatório, sendo uma chave candidata;
+O campo cgc é caracter, de tamanho variável máximo 20, sendo uma chave candidata, de preenchimento obrigatório;
+O campo endereco é caracter, de tamanho variável máximo 60;
+O campo telefone é caracter, de tamanho variável máximo 20;
+O campo codCidade é inteiro, sendo uma chave estrangeira da tabela cidade;
+
+Tabela pedido:
+O campo codPedido é serial, sendo chave primária desta tabela;
+O campo dataRealizacao é um campo de data, que tem como valor padrão a data atual, sendo que outras datas podem ser especificadas;
+O campo dataEntrega é um campo de data;
+O campo codFornecedor é um campo inteiro, sendo uma chave estrangeira da tabela fornecedor.;
+O campo valor é um campo numérico de tamanho 20 com duas casas decimais;
+
+Tabela itemPedido:
+O campo codPedido é inteiro, sendo chave primária e estrangeira da tabela pedido;
+O campo codProduto é inteiro, sendo chave primária e estrangeira da tabela produto;
+O campo quantidade é um numérico com tamanho 14, com 2 casas decimais, sendo seu preenchimento obrigatório e com valor positivo;
+
+Tabela contasPagar:
+O campo codTitulo é inteiro, sendo chave primária da tabela;
+O campo dataVencimento é um campo de data, de preenchimento obrigatório;
+O campo parcela é um campo inteiro;
+O campo codPedido é inteiro sendo chave estrangeira da tabela pedido;
+O campo valor é um campo numérico de tamanho 20 com duas casas decimais;
+O campo dataPagamento é um campo de data;
+O campo localPagamento é um campo de texto, de tamanho variável máximo 80;
+O campo juros é um campo numérico de tamanho 12 com duas casas decimais;
+O campo correcaoMonetaria é um campo numérico de tamanho 12 com duas casas decimais
+
+Tabela contasReceber:
+O campo codTitulo é inteiro, sendo chave primária da tabela;
+O campo dataVencimento é um campo de data, de preenchimento obrigatório;
+O campo codVenda é inteiro sendo chave estrangeira da tabela venda, de preenchimento obrigatório;
+O campo parcela é um campo inteiro;
+O campo valor é um campo numérico de tamanho 20 com duas casas decimais;
+O campo dataPagamento é um campo de data;
+O campo localPagamento é um de texto caracter, de tamanho variável máximo 80;
+O campo juros é um campo numérico de tamanho 12 com duas casas decimais;
+O campo correcaoMonetaria é um campo numérico de tamanho 12 com duas casas decimais
+

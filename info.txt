@@ -105,7 +105,8 @@ AUTO INCREMENT (1,2,3... n-1)
 
 CREATE TABLE frutas(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(100)
+    nome VARCHAR(100),
+    PRIMARY KEY(id)
 );
 
 INSERT INTO frutas (nome) VALUES ("Mamão"); (n precisa informar/delimitar o id)
@@ -122,7 +123,7 @@ CREATE TABLE enderecos(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     rua VARCHAR(100),
     numero VARCHAR(10),
-    pessoa_id INT NOT NULL,
+    pessoas_id INT NOT NULL,
     FOREIGN KEY (pessoas_id) REFERENCES pessoas(id)
 );
 
@@ -200,4 +201,36 @@ SELECT * FROM dept_emp WHERE dept_no BETWEEN 'd001' AND 'd008'; (retorna os depa
 AS "como"
 SELECT * AS Lucas_salario FROM salaries WHERE id = 7;
 
-JOIN
+JOIN:
+
+INNER JOIN (tem nas duas tabelas):
+(junta o num do empregado da tabela employees e salaries)
+SELECT employees.first_name, employees.last_name, salaries.salary
+FROM employees
+INNER JOIN salaries
+ON employees.emp_no = salaries.emp_no
+WHERE salaries.salary >= 12000
+ORDER BY salaries.salary DESC;
+
+LEFT JOIN: (TABELA DA ESQUERDA TEM DADOS EM EXCESSO,trás os dados q n apareceriam no INNER JOIN mas aparecem no LEFT JOIN)
+
+SELECT pessoas.nome, enderecos.rua
+FROM pessoas
+LEFT JOIN enderecos
+ON pessoas.id = enderecos.pessoas_id;
+
+RIGHT JOIN: (TABELA DA DIREITA TEM DADOS EM EXCESSO, trás os dados q n apareceriam no INNER JOIN mas aparecem no RIGHT JOIN)
+
+SELECT enderecos.rua, pessoas.nome
+FROM endereco
+RIGHT JOIN pessoas
+ON pessoas.id = enderecos.pessoas_id;
+
+JOIN JOIN
+SELECT employees.first_name, salaries.salary, titles.title
+FROM employees
+INNER JOIN salaries
+ON employees.emp_no = salaries.emp_no
+INNER JOIN titles
+ON employees.emp_no = titles.emp_no
+WHERE salaries.salary > 125000;
