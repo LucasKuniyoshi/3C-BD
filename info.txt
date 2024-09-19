@@ -84,6 +84,53 @@ ALTER TABLE <tabela> MODIFY COLUMN <coluna> <tipo>;
 ALTER TABLE funcionarios ADD COLUMN data_nascimento VARCHAR(100);
 ALTER TABLE funcionarios MODIFY COLUMN data_nascimento Date;
 
+NOT NULL
+CREATE TABLE pessoas(nome VARCHAR(100) NOT NULL); (valor nome n pode ser NULL)
+
+UNIQUE (garante q todos os dados terão valores diferentes - muito usado em email)
+ALTER Table pessoas ADD COLUMN email VARCHAR(255) UNIQUE;
+
+CHAVE PRIMÁRIA - PRIMARY KEY
+(ID da tabela, único e n pode ser nulo)
+
+CREATE TABLE produtos(
+    id INT NOT NULL,
+    nome VARCHAR(255),
+    PRIMARY KEY(id)
+);
+
+UPDATE produtos SET sku = "123456" WHERE id = 2; (muda o sku do produto com id = 2)
+
+AUTO INCREMENT (1,2,3... n-1)
+
+CREATE TABLE frutas(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(100)
+);
+
+INSERT INTO frutas (nome) VALUES ("Mamão"); (n precisa informar/delimitar o id)
+
+CHAVE ESTRANGEIRA - FOREIGN KEY 
+
+CREATE TABLE pessoas(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    idade INT
+);
+
+CREATE TABLE enderecos(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    rua VARCHAR(100),
+    numero VARCHAR(10),
+    pessoa_id INT NOT NULL,
+    FOREIGN KEY (pessoas_id) REFERENCES pessoas(id)
+);
+
+INSERT INTO pessoas (nome, idade) VALUES ("Matheus", 30) (Matheus é criado com o id = 1)
+INSERT INTO enderecos (rua, numero, pessoa_id) VALUES("Rua teste", "123", 1) (anexa o endereço com o Matheus, id = 1)
+
+INDEX - ÍNDICE => Otimiza a busca
+
 ===================================
 
             CONSULTA
@@ -96,6 +143,15 @@ SELECT nome,rg FROM pessoas; (PEGA ŚO NOME E RG)
 INSERT INTO pessoas(nome,rg,cpf,limite) VALUES ("Joaquim", "1231423", "5477586", 99999) = INSERT INTO pessoas VALUES ("Joaquim", "1231423", "5477586", 99999);
 
 SELECT * FROM pessoas WHERE nome = 'Pedro';
+SELECT * FROM pessoas WHERE salario <= 6500; (condicionais - <=, >=, >, <)
+
+SELECT DISTINCT <coluna> FROM <tabela> (retorna os diferentes dados que uma coluna pode ter)
+SELECT DISTINCT title FROM titles (retorna todos os titulos diferentes, evita repetição)
+
+OR, AND, NOT:
+WHERE id > 10 AND salario > 5000;
+WHERE cargo = 'Vendedor' || cargo = 'Programador';
+WHERE NOT title = 'Staff' AND NOT title = 'Engineer';
 
 UPDATE: 
 UPDATE <tabela> set <coluna> = <novoValor> WHERE <colunaChavePrimaria> = <valor>
@@ -105,3 +161,43 @@ DELETE:
 DELETE FROM <tabela> WHERE <condicao>
 DELETE FROM pessoas WHERE nome = "Joaquim";
 DELETE FROM pessoas WHERE limite > 2000; (deleta os q tem limite maior q 2000)
+
+ORDER BY
+SELECT * FROM salaries ORDER BY salary (Ascendente)
+SELECT * FROM salaries ORDER BY salary DESC (Descendente)
+
+LIMIT
+SELECT * FROM salaries ORDER BY salary DESC LIMIT 10; (mostra os 10 maiores salarios)
+SELECT * FROM salaries LIMIT 10; (limita a consulta para apenas 10 dados/linhas)
+
+MIN/MAX
+SELECT MIN(<coluna>) FROM <tabela>;
+SELECT MIN(salary) AS menor_salario FROM salaries; (retorna só o menor salario)
+
+SELECT MAX(<coluna>) FROM <tabela
+SELECT MAX(salary) AS maior_salario FROM salaries;
+
+COUNT
+SELECT COUNT (*) FROM salaries WHERE salary > 10000; (retorna quantos salarios são maiores q 10000)
+
+AVERAGE (AVG)
+SELECT AVG(salary) FROM salaries (média de salários);
+
+SOMA (SUM)
+SELECT SUM(salary) FROM salaries (retorna a soma de todos os salários)  
+
+LIKE "coringa"
+SELECT * FROM employees WHERE first_name LIKE "%ber%; (procura os funcionarios q o primeiro nome tem "ber")
+SELECT * FROM employees WHERE first_name LIKE "ber%; (procura apenas os q COMEÇAM com "ber")
+
+IN (busca por um conjunto de valores)
+SELECT * FROM dept_emp WHERE dept_no IN('d001', 'd004', 'd007'); (retorna tudo entre os departamentos d001, d004 e d007)
+SELECT * FROM departments WHERE dept_name IN('Development', 'Marketing');
+
+BETWEEN
+SELECT * FROM dept_emp WHERE dept_no BETWEEN 'd001' AND 'd008'; (retorna os departamentos entre d001 - d008)
+
+AS "como"
+SELECT * AS Lucas_salario FROM salaries WHERE id = 7;
+
+JOIN

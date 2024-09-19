@@ -5,4 +5,4 @@ CREATE TABLE estado (siglaEstado VARCHAR(2), nome VARCHAR(30) UNIQUE NOT NULL);
 CREATE TABLE cidade (codCidade SERIAL, nome VARCHAR(30) UNIQUE NOT NULL, siglaEstado CHAR(2) NOT NULL);
 CREATE TABLE vendedor (codVendedor SERIAL, nome VARCHAR(60) NOT NULL, dataNascimento DATE, endereco VARCHAR(60), cep CHAR(8), telefone CHAR(20), codCidade INT, dataContratacao DATE DEFAULT '2024-09-17', codDepartamento INT);
 CREATE TABLE cliente (codCliente SERIAL, endereco VARCHAR(60), codCidade INT NOT NULL, telefone VARCHAR(20), tipo VARCHAR(1) CHECK (tipo in (‘F’, ‘J’)), dataCadastro DATE DEFAULT '2024-09-17', cep VARCHAR(8));
-(Esqueci de cola todos aqui...)
+(Esqueci de colocar todos aqui...)
