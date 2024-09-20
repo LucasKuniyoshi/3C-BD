@@ -234,3 +234,5 @@ ON employees.emp_no = salaries.emp_no
 INNER JOIN titles
 ON employees.emp_no = titles.emp_no
 WHERE salaries.salary > 125000;
+
+/*** classe.* => MOSTRA TODAS AS INFORMAÇÕES DA TABELA CLASSE***/
